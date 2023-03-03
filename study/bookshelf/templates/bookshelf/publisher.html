@@ -1,0 +1,46 @@
+{% extends "bookshelf/base.html" %}
+{% load static %}
+
+{% block title %}Publisher Details{% endblock %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/publisher.css' %}">
+{% endblock %}
+
+{% block content%}
+    <div id="publishername" class="top-head">
+        <h1>{{ publisher.name }}</h1>
+    </div>
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+    {% if publisher %}
+    <div id="publisherinfo">
+        <table border="0">
+            <tr>
+                <td width="70px"><strong>出版社:</strong></td>
+                <td>{{ publisher.name }}</td>
+            </tr>
+            <tr>
+                <td><strong>简介:</strong></td>
+                <td>{{ publisher.introduction }}</td>
+            </tr>
+            <tr>
+                <td><strong>出版物：</strong></td>
+                <td></td>
+            </tr>
+        </table>
+        {% if publisher.books %}
+        {% for book in publisher.books.all %}
+            <div class="hvr-float-shadow book-item">
+                <a href="{% url 'bookshelf:bookshelf-book' book.id %}">
+                    <div class="galary">
+                        <img 
+                        src="{{ book.thumb_image.url }}" 
+                        title="{{ book.original_name }}"
+                        height="200" />
+                    </div>
+                </a>
+            </div>
+        {% endfor %}
+        {% endif %}
+    </div>
+    {% endif %}
+{% endblock %}

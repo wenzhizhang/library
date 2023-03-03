@@ -1,0 +1,37 @@
+{% extends "bookshelf/base.html" %}
+{% load static %}
+
+{% block title %}Bookshelves{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/books.css' %}">
+{% endblock %}
+
+{% block content %}
+    <h1>书架一览</h1>
+    <!-- {% include "bookshelf/pagination.html" with page=page_obj %} -->
+    {% if bookshelf_list %}
+    <div id="book_list_table">
+            <table border="1">
+                <tr>
+                    <th>书架</th>
+                    <th>总藏书</th>
+                    <th>总册数</th>
+                </tr>
+                {% for bookshelf in bookshelf_list %}
+                <tr>
+                    <td>
+                        <a href="{% url 'bookshelf:bookshelf-bookshelf' bookshelf.id %}">{{ bookshelf.name }}</a>
+                    </td>
+                    <td>{{ bookshelf.total_set_count }}</td>
+                    <td>{{ bookshelf.total_book_count }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+    </div>
+    {% else %}
+    <p>No bookshelves are available.</p>
+    {% endif %}
+    <!-- ListView passes the page to the variable page_obj -->
+    {% include "bookshelf/pagination.html" with page=page_obj %}
+{% endblock%}

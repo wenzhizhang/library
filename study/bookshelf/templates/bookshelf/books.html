@@ -1,0 +1,82 @@
+{% extends "bookshelf/base.html" %}
+{% load static %}
+
+{% block title %}My Books{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/books.css' %}">
+{% endblock %}
+
+{% block content %}
+    {% include "bookshelf/navbar.html" %}
+    {% if book_list %}
+    <div id="book_list_table">
+            {% if tag %}
+                <h2>Books tagged with "{{ tag.name }}"</h2>
+            {% endif %}
+            <table>
+                <tr>
+                    <th>预览</th>
+                    <th>ISBN</th>
+                    <th>中文名</th>
+                    <th>名称</th>
+                    <th>作者</th>
+                    <th>出版社</th>
+                    <th>品牌</th>
+                    <th>册数</th>
+                    <th>语种</th>
+                    <th>排版</th>
+                    <th>分类</th>
+                    <th>阅读状态</th>
+                    <th>豆瓣评分</th>
+                </tr>
+                {% for book in book_list %}
+                <tr>
+                    <td>
+                        <a href="{% url 'bookshelf:bookshelf-book' book.id %}">
+                            <div class="galary hvr-float-shadow">
+                                <img src="{{ book.thumb_image.url }}" height="100"/>
+                            </div>
+                        </a>
+                        <p class="tags">
+                            Tags:
+                            {% for tag in book.tags.all %}
+                                <a href="{% url 'bookshelf:book_list_by_tag' tag.slug %}">
+                                    {{ tag.name }}
+                                </a>
+                                {% if not forloop.last %}, {% endif %}
+                            {% endfor %}
+                        </p>
+                    </td>
+                    <td><a href="{% url 'bookshelf:bookshelf-book' book.id %}">{{ book.isbn }}</a></td>
+                    <td>{{ book.chinese_name }}</td>
+                    <td><a href="{{ book.link }}">{{ book.original_name }}</a></td>
+                    <td>
+                        {% for author in book.authors.all %}
+                            <a href="{% url 'bookshelf:bookshelf-author' author.id %}">{{ author }}</a><br>
+                        {% endfor %}
+                    </td>
+                    <td>
+                        <a href="{% url 'bookshelf:bookshelf-publisher' book.publisher.id %}">{{ book.publisher }}</a>
+                    </td>
+                    <td>
+                        {% if book.brand %}
+                        <a href="{% url 'bookshelf:bookshelf-brand' book.brand.id %}">{{ book.brand }}</a>
+                        {% endif %}
+                    </td>
+                    <td>{{ book.book_count }}</td>
+                    <td>{{ book.language }}</td>
+                    <td>{{ book.compose_type }}</td>
+                    <td>{{ book.category }}</td>
+                    <td>{{ book.read_state }}</td>
+                    <td>{{ book.douban_score }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+    </div>
+
+    {% else %}
+    <p>No books are available.</p>
+    {% endif %}
+    {% include "bookshelf/pagination.html" with page=page_obj %}
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends "bookshelf/base.html" %}
+{% load static %}
+
+{% block title %}My Reading Plans{% endblock %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/plans.css' %}">
+{% endblock %}
+
+{% block content %}
+{% include "bookshelf/navbar.html" %}
+{% include "bookshelf/pagination.html" with page=page_obj %}
+{% if reading_plan_list %}
+<div id="plan_list_table">
+    <table border="1">
+        <tr>
+            <th>阅读计划</th>
+            <th>简介</th>
+            <th>开始日期</th>
+            <th>结束日期</th>
+            <th>完成率</th>
+        </tr>
+        {% for plan in reading_plan_list %}
+        <tr>
+            <td><a href="{% url 'bookshelf:bookshelf-plan' plan.id %}">{{ plan.name }}</a></td>
+            <td>{{ plan.description }}</td>
+            <td>{{ plan.start_date }}</td>
+            <td>{{ plan.end_date }}</td>
+            <td>{{ plan.complete_ratio }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+{% else %}
+<p>No reading plans are available.</p>
+{% endif %}
+{% include "bookshelf/pagination.html" with page=page_obj %}
+{% endblock %}

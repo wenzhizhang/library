@@ -1,0 +1,32 @@
+{% extends "bookshelf/base.html" %}
+{% load static %}
+
+{% block title %}Book Serieses{% endblock %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/serieses.css' %}">
+{% endblock %}
+
+{% block content %}
+{% include "bookshelf/navbar.html" %}
+{% include "bookshelf/pagination.html" with page=page_obj %}
+{% if series_list %}
+<div id="series_list_table">
+    <table border="1">
+        <tr>
+            <th id="name">丛书名</th>
+            <th>简介</th>
+        </tr>
+        {% for series in series_list %}
+        <tr>
+            <td id="name"><a href="{% url 'bookshelf:bookshelf-series' series.id %}">{{ series.name }}</a></td>
+            <td>{{ series.introduction }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+{% else %}
+<p>No serieses are available.</p>
+{% endif %}
+{% include "bookshelf/pagination.html" with page=page_obj %}
+{% endblock %}

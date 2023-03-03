@@ -1,0 +1,54 @@
+{% extends "bookshelf/base.html" %}
+{% load static %}
+
+{% block title %}Bookshelf Details{% endblock %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/bookshelf.css' %}">
+{% endblock %}
+
+{% block content%}
+    <div id="bookshelfname" class="top-head">
+        <h1>{{ booksehlf.name }}</h1>
+    </div>
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+    {% if bookshelf %}
+    <div id="bookshelfinfo">
+        <table border="0">
+            <tr>
+                <td width="70px"><strong>书架:</strong></td>
+                <td>{{ bookshelf.name }}</td>
+            </tr>
+            <tr>
+                <td><strong>简介:</strong></td>
+                <td>{{ bookshelf.description }}</td>
+            </tr>
+            <tr>
+                <td><strong>总藏书:</strong></td>
+                <td>{{ bookshelf.total_set_count }}</td>
+            </tr>
+            <tr>
+                <td><strong>总册数:</strong></td>
+                <td>{{ bookshelf.total_book_count }}</td>
+            </tr>
+            <tr>
+                <td><strong>藏书：</strong></td>
+                <td></td>
+            </tr>
+        </table>
+        {% if bookshelf.books %}
+        {% for book in bookshelf.books.all %}
+            <div class="hvr-float-shadow book-item">
+                <a href="{% url 'bookshelf:bookshelf-book' book.id %}">
+                    <div class="galary">
+                        <img 
+                        src="{{ book.thumb_image.url }}" 
+                        title="{{ book.original_name }}"
+                        height="200" />
+                    </div>
+                </a>
+            </div>
+        {% endfor %}
+        {% endif %}
+    </div>
+    {% endif %}
+{% endblock %}

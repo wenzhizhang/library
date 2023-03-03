@@ -1,0 +1,46 @@
+{% extends "bookshelf/base.html" %}
+{% load static %}
+
+{% block title %}丛书详情{% endblock %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/series.css' %}">
+{% endblock %}
+{% block content%}
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+{% if series %}
+<div id="seriesinfo">
+    <table border="0">
+        <tr>
+            <td><strong>丛书名：</strong></td>
+            <td>{{ series.name }}</td>
+        </tr>
+        <tr>
+            <td><strong>简介：</strong></td>
+            {% if series.introduction %}
+            <td>{{ series.introduction }}</td>
+            {% else %}
+            <td>无</td>
+            {% endif %}
+        </tr>
+        <tr>
+            <td><strong>书单：</strong></td>
+            <td></td>
+        </tr>
+    </table>
+    {% if series.books %}
+    {% for book in series.books.all %}
+    <div class="hvr-float-shadow book-item">
+        <a href="{% url 'bookshelf:bookshelf-book' book.id %}">
+            <div class="galary">
+                <img 
+                src="{{ book.thumb_image.url }}" 
+                title="{{ book.original_name }}"
+                height="200" />
+            </div>
+        </a>
+    </div>
+    {% endfor %}
+    {% endif %}
+</div>
+{% endif %}
+{% endblock %}

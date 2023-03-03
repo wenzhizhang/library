@@ -1,0 +1,67 @@
+{% extends "bookshelf/base.html" %}
+{% load static %}
+{% block title %}Author Details{% endblock %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/author.css' %}">
+{% endblock %}
+{% block content%}
+    <div id="authorname" class="top-head">
+        <h1>{{ author.name }}</h1>
+    </div>
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+    {% if author %}
+    <div id="authorinfo">
+        {% if author.photo %}
+        <div class="photo">
+            <img src="{{ author.photo.url }}" height="350"/>
+        </div>
+        {% endif %}
+        <table>
+            <tr>
+                <td width="100px"><strong>姓名：</strong></td>
+                <td>{{ author.name }}</td>
+            </tr>
+            <tr>
+                <td><strong>中文名：</strong></td>
+                <td>{{ author.chinese_name }}</td>
+            </tr>
+            <tr>
+                <td><strong>国籍：</strong></td>
+                <td>{{ author.nation }}</td>
+            </tr>
+            <tr>
+                <td><strong>朝代：</strong></td>
+                <td>{{ author.dynasty }}</td>
+            </tr>
+            <tr>
+                <td><strong>简介：</strong></td>
+                {% if author.intro %}
+                <td>{{ author.intro }}</td>
+                {% else %}
+                <td>无</td>
+                {% endif %}
+            </tr>
+            <tr>
+                <td><strong>作品：</strong></td>
+                <td></td>
+            </tr>
+        </table>
+        {% if author.books %}
+
+        {% for book in author.books.all %}
+            <div class="hvr-float-shadow book-item">
+                <a href="{% url 'bookshelf:bookshelf-book' book.id %}">
+                    <div class="galary">
+                        <img 
+                        src="{{ book.thumb_image.url }}" 
+                        title="{{ book.original_name }}"
+                        height="200" />
+                    </div>
+                </a>
+            </div>
+        {% endfor %}
+        {% endif %}
+    </div>
+    {% endif %}
+
+{% endblock %}

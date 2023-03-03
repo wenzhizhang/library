@@ -1,0 +1,47 @@
+{% extends "bookshelf/base.html" %}
+{% load static %}
+
+{% block title %}My Books{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/authors.css' %}">
+{% endblock %}
+{% block content %}
+{% include "bookshelf/navbar.html" %}
+<!-- {% include "bookshelf/pagination.html" with page=page_obj %} -->
+{% if author_list %}
+<div id="author_list_table">
+    <table border="1">
+        <tr>
+            <th>相片</th>
+            <th>姓名</th>
+            <th>中文名</th>
+            <th>国籍</th>
+            <th>朝代</th>
+        </tr>
+        {% for author in author_list %}
+        <tr>
+            {% if author.photo %}
+            <td>
+                <a href="{% url 'bookshelf:bookshelf-author' author.id %}">
+                    <div class="galary hvr-float-shadow">
+                        <img src="{{ author.photo.url }}" height="100"/>
+                    </div>
+                </a>
+            </td>
+            {% else %}
+            <td>-</td>
+            {% endif %}
+            <td><a href="{% url 'bookshelf:bookshelf-author' author.id %}">{{ author.name }}</a></td>
+            <td>{{ author.chinese_name }}</td>
+            <td>{{ author.nation }}</td>
+            <td>{{ author.dynasty }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% else %}
+<p>No authors are available.</p>
+{% endif %}
+{% include "bookshelf/pagination.html" with page=page_obj %}
+{% endblock %}

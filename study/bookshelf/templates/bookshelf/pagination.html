@@ -1,0 +1,29 @@
+<div class="pagination">
+    <span class="step-links">
+        {% if page.has_previous %}
+        <a class="text-success" href="?page={{ page_obj.previous_page_number }}">上一页</a>
+        {% else %}
+        <span class="text-secondary" title="当前页已经是首页">上一页</span>
+        {% endif %}
+        <span class="current">
+            Page {{ page.number }} of {{ page.paginator.num_pages }}.
+        </span>
+        {% if page.has_next %}
+        <a class="text-success" href="?page={{ page.next_page_number }}">下一页</a>
+        {% else %}
+        <span class="text-secondary" title="当前页已经是末页">下一页</span>
+        {% endif %}
+    </span>
+    <input class="passage" type="text" id="num" value="输入页码"
+        onfocus="javascript:if(this.value=='输入页码')this.value='';" />
+    <input class="jump" type="button" id="jump" value="跳转" onclick="Page_Jump()" />
+</div>
+
+<script>
+    function Page_Jump() {
+        if (document.getElementById("num").value === "输入页码") {
+            return
+        }
+        window.location.href = "?page=" + document.getElementById("num").value;
+    }
+</script>

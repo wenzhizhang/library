@@ -1,0 +1,52 @@
+{% extends "bookshelf/base.html" %}
+{% load static %}
+
+{% block title %}Book Collection Details{% endblock %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/collection.css' %}">
+{% endblock %}
+
+{% block content%}
+<div id="collectionname" class="top-head">
+    <h1>{{ collection.name }}</h1>
+</div>
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+{% if collection %}
+<div id="collectioninfo">
+    <table border="0">
+        <tr>
+            <td><strong>书单名：</strong></td>
+            <td>{{ collection.name }}</td>
+        </tr>
+        <tr>
+            <td><strong>简介：</strong></td>
+            {% if collection.introduction %}
+            <td>{{ collection.introduction }}</td>
+            {% else %}
+            <td>无</td>
+            {% endif %}
+        </tr>
+        <tr>
+            <td><strong>书单：</strong></td>
+            <td></td>
+        </tr>
+    </table>
+    {% if collection.books %}
+    {% for book in collection.books.all %}
+    <div class="hvr-float-shadow book-item">
+        <a href="{% url 'bookshelf:bookshelf-book' book.id %}">
+            <div class="galary">
+                <img 
+                src="{{ book.thumb_image.url }}" 
+                title="{{ book.original_name }}"
+                height="200"/>
+            </div>
+        </a>
+        <!-- <a href="{% url 'bookshelf:bookshelf-book' book.id %}">{{ book.original_name }}</a> -->
+    </div>
+    {% endfor %}
+    {% endif %}
+</div>
+
+{% endif %}
+{% endblock %}

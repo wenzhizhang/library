@@ -1,0 +1,195 @@
+body {
+    margin-left: 5%;
+    margin-right: 5%;
+    border: 2px solid black;
+    padding: 10px 10px 10px 10px;
+    font-family: sans-serif;
+}
+
+body table {
+    border: 1 solid gray;
+}
+
+body {
+    padding-left: 15px;
+}
+
+h1 {
+    font-family: sans-serif;
+    border-bottom: 1px solid black;
+}
+
+/* .galary {
+    margin-top: 10px;
+    width: 100px;
+    height: 100px;
+    box-shadow: 0 0 3px 1px rgba(159, 161, 161, 0.5);
+    transition: 0.3s;
+} */
+
+/* .galary:hover {
+    margin-top: 10px;
+    box-shadow: 0 3px 15px 3px rgba(159, 161, 161, 0.5);
+} */
+
+body {
+    font: normal 8px auto "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+    color: #4f6b72;
+    background: #E6EAE9;
+}
+
+a {
+    color: #c75f3e;
+}
+
+#mytable {
+    width: 700px;
+    padding: 0;
+    margin: 140;
+}
+
+caption {
+    padding: 0 0 5px 0;
+    width: 700px;
+    font: italic 11px "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+    text-align: right;
+}
+
+th {
+    font: bold 14px "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+    color: black;
+    border-right: 1px;
+    border-bottom: 1px;
+    border-top: 1px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-align: left;
+    padding: 6px 6px 6px 12px;
+    /*background: #CAE8EA url(images/bg_header.jpg) no-repeat;*/
+}
+
+th.nobg {
+    border-top: 0;
+    border-left: 0;
+    border-right: 1;
+    background: none;
+}
+
+td {
+    font-size: 12px;
+    border-right: 1px;
+    border-bottom: 1px;
+    /*background: #fff;*/
+    padding: 6px 6px 6px 12px;
+    color: #4f6b72;
+}
+
+td.alt {
+    background: #F5FAFA;
+    color: #797268;
+}
+
+th.spec {
+    border-left: 1px solid #C1DAD7;
+    border-top: 0;
+    background: #fff url(images/bullet1.gif) no-repeat;
+    font: bold 10px "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+}
+
+th.specalt {
+    border-left: 1px solid #C1DAD7;
+    border-top: 0;
+    /*background: #f5fafa url(images/bullet2.gif) no-repeat;*/
+    font: bold 10px "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+    color: #797268;
+}
+
+.sidebar {
+    width: 130px;
+    position: fixed;
+    z-index: 1;
+    top: 20px;
+    left: 10px;
+    background: #eee;
+    overflow-x: hidden;
+    padding: 8px 0;
+}
+
+.main {
+    margin-left: 140px;
+    /* Same width as the sidebar + left position in px */
+    font-size: 28px;
+    /* Increased text to enable scrolling */
+    padding: 0px 10px;
+}
+
+@media screen and (max-height: 450px) {
+    .sidebar {
+        padding-top: 15px;
+    }
+    .sidebar a {
+        font-size: 18px;
+    }
+}
+
+body {
+    background-image: url("../../../media/image/background/bg4.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position:0 0;
+    background-attachment:fixed;
+    min-height: 100vh;
+    box-sizing: border-box;
+    margin: 0;
+    /* padding-top: calc(50vh - 6em); */
+    font: 150%/1.6 Baskerville, Palatino, serif;
+}
+
+#book_list_table {
+    /*background-color: rgba(0,0,0,0.8);*/
+    position: relative;
+    margin: 0 auto;
+    padding: 1em;
+    max-width: 50em;
+    background: hsla(0,0%,100%,.25) border-box;
+    overflow: hidden;
+    border-radius: .3em;
+    box-shadow: 0 0 0 1px hsla(0,0%,100%,.3) inset,
+                0 .5em 1em rgba(0, 0, 0, 0.6);
+    text-shadow: 0 1px 1px hsla(0,0%,100%,.3);
+}
+
+#book_list_table::before{
+    content: '';
+    position: absolute;
+    top: 0; rightright: 0; bottombottom: 0; left: 0;
+    margin: -30px;
+    z-index: -1;
+    -webkit-filter: blur(20px);
+    filter: blur(20px);
+}
+
+/*#book_list_table {*/
+/*    background-color: rgba(0, 0, 5, 0.5);*/
+/*}*/
+
+td {
+    color: black;
+	font-size: 12px;
+}
+
+/* a {
+    color: cyan;
+} */
+
+h1 {
+    color: white;
+}
+
+#book_list_table a {
+    color: #080cf8;
+}
+
+.navbar {
+    
+}

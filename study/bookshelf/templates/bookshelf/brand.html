@@ -1,0 +1,46 @@
+{% extends "bookshelf/base.html" %}
+{% load static %}
+
+{% block title %}brand Details{% endblock %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/brand.css' %}">
+{% endblock %}
+
+{% block content%}
+    <div id="brandname" class="top-head">
+        <h1>{{ brand.name }}</h1>
+    </div>
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+    {% if brand %}
+    <div id="brandinfo">
+        <table border="0">
+            <tr>
+                <td width="70px"><strong>品牌:</strong></td>
+                <td>{{ brand.name }}</td>
+            </tr>
+            <tr>
+                <td><strong>简介:</strong></td>
+                <td>{{ brand.introduction }}</td>
+            </tr>
+            <tr>
+                <td><strong>出版物：</strong></td>
+                <td></td>
+            </tr>
+        </table>
+        {% if brand.books %}
+        {% for book in brand.books.all %}
+            <div class="hvr-float-shadow book-item">
+                <a href="{% url 'bookshelf:bookshelf-book' book.id %}">
+                    <div class="galary">
+                        <img 
+                        src="{{ book.thumb_image.url }}" 
+                        title="{{ book.original_name }}"
+                        height="200" />
+                    </div>
+                </a>
+            </div>
+        {% endfor %}
+        {% endif %}
+    </div>
+    {% endif %}
+{% endblock %}

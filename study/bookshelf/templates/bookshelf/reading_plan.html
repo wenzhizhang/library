@@ -1,0 +1,63 @@
+{% extends "bookshelf/base.html" %}
+{% load static %}
+
+{% block title %}Reading Plan Details{% endblock %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/plan.css' %}">
+{% endblock %}
+
+{% block content%}
+    <div id="planname" class="top-head">
+        <h1>{{ reading_plan.name }}</h1>
+    </div>
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+    {% if reading_plan %}
+    <div id="planinfo">
+        <table border="0">
+            <tr>
+                <td><strong>阅读计划：</strong></td>
+                <td>{{ reading_plan.name }}</td>
+            </tr>
+            <tr>
+                <td><strong>简介：</strong></td>
+                {% if reading_plan.description %}
+                <td>{{ reading_plan.description }}</td>
+                {% else %}
+                <td>无</td>
+                {% endif %}
+            </tr>
+            <tr>
+                <td><strong>开始：</strong></td>
+                <td>{{ reading_plan.start_date }}</td>
+            </tr>
+            <tr>
+                <td><strong>结束：</strong></td>
+                <td>{{ reading_plan.end_date }}</td>
+            </tr>
+            <tr>
+                <td><strong>完成率：</strong></td>
+                <td>{{ reading_plan.complete_ratio }}</td>
+            </tr>
+            <tr>
+                <td><strong>书单：</strong></td>
+                <td></td>
+            </tr>
+        </table>
+            {% if reading_plan.books %}
+            {% for book in reading_plan.books.all %}
+            <div class="hvr-float-shadow book-item">
+                <a href="{% url 'bookshelf:bookshelf-book' book.id %}">
+                    <div class="galary">
+                        <img 
+                        src="{{ book.thumb_image.url }}" 
+                        title="{{ book.original_name }}"
+                        height="200" />
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+            {% endif %}
+    </div>
+
+    {% endif %}
+{% endblock %}

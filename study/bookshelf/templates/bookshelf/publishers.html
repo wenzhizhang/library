@@ -1,0 +1,33 @@
+{% extends "bookshelf/base.html" %}
+{% load static %}
+
+{% block title %}Publishers{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/books.css' %}">
+{% endblock %}
+
+{% block content %}
+    <h1>出版社一览</h1>
+    <!-- {% include "bookshelf/pagination.html" with page=page_obj %} -->
+    {% if publisher_list %}
+    <div id="book_list_table">
+            <table border="1">
+                <tr>
+                    <th>出版社</th>
+                </tr>
+                {% for publisher in publisher_list %}
+                <tr>
+                    <td>
+                        <a href="{% url 'bookshelf:bookshelf-publisher' publisher.id %}">{{ publisher.name }}</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+    </div>
+    {% else %}
+    <p>No publishers are available.</p>
+    {% endif %}
+    <!-- ListView passes the page to the variable page_obj -->
+    {% include "bookshelf/pagination.html" with page=page_obj %}
+{% endblock%}

@@ -1,0 +1,33 @@
+{% extends "bookshelf/base.html" %}
+{% load static %}
+
+{% block title %}brands{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/books.css' %}">
+{% endblock %}
+
+{% block content %}
+    <h1>品牌一览</h1>
+    <!-- {% include "bookshelf/pagination.html" with page=page_obj %} -->
+    {% if brand_list %}
+    <div id="book_list_table">
+            <table border="1">
+                <tr>
+                    <th>品牌</th>
+                </tr>
+                {% for brand in brand_list %}
+                <tr>
+                    <td>
+                        <a href="{% url 'bookshelf:bookshelf-brand' brand.id %}">{{ brand.name }}</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+    </div>
+    {% else %}
+    <p>No brands are available.</p>
+    {% endif %}
+    <!-- ListView passes the page to the variable page_obj -->
+    {% include "bookshelf/pagination.html" with page=page_obj %}
+{% endblock%}

@@ -1,0 +1,150 @@
+{% extends "bookshelf/base.html" %}
+{% load static %}
+
+{% block title %}Book Details{% endblock %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/bookpdf.css' %}">
+{% endblock %}
+
+{% block content%}
+    <div id="bookname" class="top-head">
+        <h1>{{ book.original_name }}</h1>
+    </div>
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+    {% if book %}
+        <div id="bookinfo">
+            <div class="thumb">
+                <img src="{{ book.thumb_image.path }}"/>
+            </div>
+            <div class="baseinfo">
+                <table border="0">
+                    <tr>
+                        <td width="100px"><strong>ISBN：</strong></td>
+                        <td>{{ book.isbn }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>名称：</strong></td>
+                        <td>{{ book.original_name }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>中文名：</strong></td>
+                        <td>{{ book.chinese_name }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>作者：</strong></td>
+                        <td>
+                            {% for author in book.authors.all %}
+                                <a href="{% url 'bookshelf:bookshelf-author' author.id %}">{{ author }}</a>
+                            {% endfor %}
+                        </td>
+                    </tr>
+                    {% if book.translator %}
+                        <tr>
+                            <td><strong>翻译/编纂/整理：</strong></td>
+                            <td>{{ book.translator}}</td>
+                        </tr>
+                    {% endif %}
+                    <tr>
+                        <td><strong>定价：</strong></td>
+                        <td>{{ book.price }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>出版社：</strong></td>
+                        <td>
+                            <a href="{% url 'bookshelf:bookshelf-publisher' book.publisher.id %}">{{ book.publisher }}</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>出版日期：</strong></td>
+                        <td>{{ book.publish_date }}</td>
+                    </tr>
+                    {% if book.edition %}
+                    <tr>
+                        <td><strong>版次：</strong></td>
+                        <td>{{ book.edition }}</td>
+                    </tr>
+                    {% endif %}
+                    {% if book.edition %}
+                    <tr>
+                        <td><strong>印次：</strong></td>
+                        <td>{{ book.print }}</td>
+                    </tr>
+                    {% endif %}
+                    {% if book.edition %}
+                    <tr>
+                        <td><strong>印数：</strong></td>
+                        <td>{{ book.printed_number }}</td>
+                    </tr>
+                    {% endif %}
+                    {% if book.book_series %}
+                    <tr>
+                        <td><strong>丛书：</strong></td>
+                        <td>
+                            <a href="{% url 'bookshelf:bookshelf-series' book.book_series.id %}">{{ book.book_series }}</a>
+                        </td>
+                    </tr>
+                    {% endif %}
+                    <tr>
+                        <td><strong>分类：</strong></td>
+                        <td>{{ book.category }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>装帧：</strong></td>
+                        <td>{{ book.binding_type }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>纸张：</strong></td>
+                        <td>{{ book.paper_type }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>语言：</strong></td>
+                        <td>{{ book.language }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>排版：</strong></td>
+                        <td>{{ book.compose_type }}</td>
+                    </tr>
+                    <tr>
+                        <td width="100px"><strong>页数：</strong></td>
+                        <td>{{ book.pages }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>册数：</strong></td>
+                        <td>{{ book.book_count }}</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="otherinfo">
+                <table border="0">
+                    <tr>
+                        <td><strong>简介：</strong></td>
+                        {% if book.introduction %}
+                            <td id="bookintro">{{ book.introduction }}</td>
+                        {% else %}
+                            <td>无</td>
+                        {% endif %}
+                    </tr>
+                    <tr>
+                        <td><strong>豆瓣评分：</strong></td>
+                        <td>{{ book.douban_score }}</td>
+                    </tr>
+                    {% if book.tags.all %}
+                    <tr>
+                        <td><strong>标签：</strong></td>
+                        <td>
+                            {% for tag in book.tags.all %}
+                                <a href="{% url 'bookshelf:book_list_by_tag' tag.slug %}">
+                                    {{ tag.name }}
+                                </a>
+                                {% if not forloop.last %}, {% endif %}
+                            {% endfor %}
+                        </td>
+                    </tr>
+                    {% endif %}
+                </table>
+            </div>
+        </div>
+
+        <br>
+    {% endif %}
+{% endblock %}
