@@ -1,7 +1,30 @@
 # library
 This App is used to manage the books I own
+Restful API is provided to manage the books, authors, producers and so on.
 
-Restful API is provided to manage the books, authors, publishers and so on.
+# Preview
+- Book list view
+
+    ![Book List View](study/media/image/screenshots/BookList.png)
+
+- Book eetails view
+
+    ![Book Details View](study/media/image/screenshots/BookDetails.png)
+
+- Author and his/her books
+
+    ![Author View](study/media/image/screenshots/AuthorView.png)
+
+- Publisher and its published books
+
+    ![Publisher View](study/media/image/screenshots/PublisherView.png)
+
+- Book series view
+
+    ![Book Series View](study/media/image/screenshots/BookSeriesView.png)
+
+- Reading plan
+    ![Reading Plan](study/media/image/screenshots/ReadingPlan.png)
 
 # Usage
 - Running on windows.  
@@ -19,19 +42,3 @@ Restful API is provided to manage the books, authors, publishers and so on.
     # Run with docker container.
     docker run -it -p 8080:8080 -p 8443:8443 -e DJANGO_SUPERUSER_USERNAME=admin -e DJANGO_SUPERUSER_PASSWORD=******** -e DJANGO_SUPERUSER_EMAIL=admin@example.com library
     ```
-
-- Admin webpage: `http://localhost:8000/admin`
-
-- Create your own super user
-
-    ```
-    python manage.py createsuperuser
-    ```
-
-- Modify your password
-
-    ```
-    python manage.py changepassword adminuser
-    ```
-
-- Book list webpage: `http://localhost:8000/bookshelf/books/`
